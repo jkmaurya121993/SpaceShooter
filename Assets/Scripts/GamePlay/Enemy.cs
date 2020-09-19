@@ -22,18 +22,18 @@ public class Enemy : MonoBehaviour {
     [HideInInspector] public float shotTimeMin, shotTimeMax; //max and min time for shooting from the beginning of the path
 
     #endregion
-
     private void Start()
     {
         Invoke("ActivateShooting", Random.Range(shotTimeMin, shotTimeMax));
+       
     }
 
-    //coroutine making a shot
-    void ActivateShooting() 
+    // making a shot
+    void ActivateShooting(float range) 
     {
-        if (Random.value < (float)shotChance / 100)                             //if random value less than shot probability, making a shot
-        {
-            Instantiate(Projectile,  gameObject.transform.position, Quaternion.identity);             
+        if (range < (float)shotChance / 100)                             //if random value less than shot probability, making a shot
+        {           
+            Instantiate(Projectile, gameObject.transform.position, Quaternion.identity);
         }
     }
 
@@ -44,8 +44,8 @@ public class Enemy : MonoBehaviour {
         if (health <= 0)
             Destruction();
         else
-        {            
-            Instantiate(hitEffect, transform.position, Quaternion.identity, transform);
+        {        
+           Instantiate(hitEffect, transform.position, Quaternion.identity, transform);
         }
     }    
 
@@ -54,8 +54,8 @@ public class Enemy : MonoBehaviour {
     {
         if (collision.tag == "Player")
         {
-            if (Projectile.GetComponent<Projectile>() != null)
-                Player.instance.GetDamage(Projectile.GetComponent<Projectile>().damage);
+            if (Projectile.GetComponent<TriggerHandler>() != null)
+                Player.instance.GetDamage(Projectile.GetComponent<TriggerHandler>().damage);
             else
                 Player.instance.GetDamage(1);
         }
@@ -64,8 +64,8 @@ public class Enemy : MonoBehaviour {
     //method of destroying the 'Enemy'
     void Destruction()                           
     {
-        GameManager.GetInstance().PlayAudio(AUDIOTYPE.EXPLOSION);
-        Instantiate(destructionVFX, transform.position, Quaternion.identity); 
+        GameManager.Instance.PlayAudio(AUDIOTYPE.EXPLOSION);
+        Instantiate(destructionVFX, transform.position, Quaternion.identity);      
         Destroy(gameObject);
     }
 }

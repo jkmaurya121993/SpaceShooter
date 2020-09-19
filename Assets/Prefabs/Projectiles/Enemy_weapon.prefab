@@ -133,12 +133,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1728936453619090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002f4bcf8b0ec074f8485b31c91504b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a8515ff1b32ecb498437becf714b57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  enemyBullet: 1
-  destroyedByCollision: 1
+  destructionTime: 0.3
 --- !u!50 &50246834944912052
 Rigidbody2D:
   serializedVersion: 4

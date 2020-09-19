@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
     {
         levelUpInitPosition = levelUp.transform.localPosition;
 
-        gameManager = GameManager.GetInstance();
+        gameManager = GameManager.Instance;
 
     }
 

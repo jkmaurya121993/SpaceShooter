@@ -17,7 +17,7 @@ public enum AUDIOTYPE
 /// Scripts handle the game state and the sound.
 /// </summary>
 
-public class GameManager : MonoBehaviour
+public sealed class GameManager : MonoBehaviour
 {
     #region PUBLIC FIELDS
 
@@ -50,16 +50,17 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public static GameManager GetInstance()
+    public static GameManager Instance
     {
-        if(instance==null)
+        get
         {
-            GameObject gameManager = new GameObject("GameManager");
-
-            instance = gameManager.AddComponent<GameManager>();
-        }
-
-        return instance;
+            if (instance == null)
+            {           
+                instance = FindObjectOfType<GameManager>();
+            }
+            return instance;
+        }       
+       
     }
 
     #region PUBLIC METHODS

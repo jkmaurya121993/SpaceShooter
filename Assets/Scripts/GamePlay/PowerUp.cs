@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Bonus : MonoBehaviour {
+public class PowerUp : MonoBehaviour {
 
     //when colliding with another object, if another objct is 'Player', sending command to the 'Player'
     private void OnTriggerEnter2D(Collider2D collision) 

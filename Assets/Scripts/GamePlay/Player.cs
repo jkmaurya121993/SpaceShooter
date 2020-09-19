@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 
         maxHealth = health;
 
-        GetComponent<AudioSource>().mute = GameManager.GetInstance().isAudioOff;
+        GetComponent<AudioSource>().mute = GameManager.Instance.isAudioOff;
     }
 
     #endregion
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void Destruction()
     {
-        GameManager.GetInstance().PlayAudio(AUDIOTYPE.EXPLOSION);
+        GameManager.Instance.PlayAudio(AUDIOTYPE.EXPLOSION);
 
         int previousScore = PlayerPrefs.GetInt(GameManager.highestScoreKey);
 
@@ -100,8 +100,8 @@ public class Player : MonoBehaviour
         Time.timeScale = 0;
 
         Instantiate(destructionFX, transform.position, Quaternion.identity); //generating destruction visual effect and destroying the 'Player' object
-        gameObject.SetActive(false);
-        //Destroy(gameObject);
+       // gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     #endregion
 }

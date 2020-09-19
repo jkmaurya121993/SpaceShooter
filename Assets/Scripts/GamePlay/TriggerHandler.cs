@@ -4,7 +4,7 @@
 /// Defines the damage and defines whether the projectile belongs to the ‘Enemy’ or to the ‘Player’, whether the projectile is destroyed in the collision, or not and amount of damage.
 /// </summary>
 
-public class Projectile : MonoBehaviour {
+public class TriggerHandler : MonoBehaviour {
 
     [Tooltip("Damage which a projectile deals to another object. Integer")]
     public int damage;
@@ -30,13 +30,18 @@ public class Projectile : MonoBehaviour {
             Player.instance.SetScore(damage);
 
             if (destroyedByCollision)
-                Destruction();
+            {
+                gameObject.SetActive(false);
+               // Destruction();
+            }
+               
         }
     }
 
     void Destruction() 
     {
         Destroy(gameObject);
+       
     }
 }
 

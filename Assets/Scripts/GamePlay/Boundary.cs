@@ -28,11 +28,11 @@ public class Boundary : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision) 
     {        
         if (collision.tag == "Bullet")
-        {
-            Destroy(collision.gameObject);
+        {                    
+            collision.gameObject.SetActive(false);          
         }
-        else if (collision.tag == "Bonus") 
-            Destroy(collision.gameObject); 
+        else if (collision.tag == "Bonus")            
+            Destroy(collision.gameObject);
     }
 
 }

@@ -21,7 +21,6 @@ public class PlayerShooting : MonoBehaviour {
     //time for a new shot
     [HideInInspector] public float nextFire;
 
-
     [Tooltip("current weapon power")]
     [Range(1, 4)]       //change it if you wish
     public int weaponPower = 1; 
@@ -34,7 +33,7 @@ public class PlayerShooting : MonoBehaviour {
     #endregion
 
     #region PRIVATE FIELDS
-
+    ObjectPool objectPool;
     GameManager gameManager;
 
     #endregion
@@ -46,15 +45,14 @@ public class PlayerShooting : MonoBehaviour {
         if (instance == null)
             instance = this;
 
-        gameManager = GameManager.GetInstance();
+        gameManager = GameManager.Instance;
     }
     private void Start()
     {
-        //receiving shooting visual effects components
+        objectPool = ObjectPool.SharedInstance;     
         guns.leftGunVFX = guns.leftGun.GetComponent<ParticleSystem>();
         guns.rightGunVFX = guns.rightGun.GetComponent<ParticleSystem>();
         guns.centralGunVFX = guns.centralGun.GetComponent<ParticleSystem>();
-
         gameManager.PlayAudio(AUDIOTYPE.PLAYERSHOT, true);
     }
 
@@ -64,7 +62,7 @@ public class PlayerShooting : MonoBehaviour {
         {
             if (Time.time > nextFire)
             {
-                MakeAShot();                                                         
+                CreatBulletShot();                                                         
                 nextFire = Time.time + 1 / fireRate;
             }
         }
@@ -73,44 +71,52 @@ public class PlayerShooting : MonoBehaviour {
     #endregion
 
     #region PRIVATE METHODS
+    /// <summary>
+    /// method for a shot
+    /// According to weaponPower bullet shot will creat
+    /// </summary>
 
-    //method for a shot
-    void MakeAShot() 
+    private void CreatBulletShot() 
     {
-        switch (weaponPower) // according to weapon power 'pooling' the defined anount of projectiles, on the defined position, in the defined rotation
+        switch (weaponPower) 
         {
             case 1:
-                CreateLazerShot(projectileObject, guns.centralGun.transform.position, Vector3.zero);
+                EnableBulletShot(objectPool.GetPooledObject(), guns.centralGun.transform.position, Vector3.zero);
                 guns.centralGunVFX.Play();
                 break;
-            case 2:
-                CreateLazerShot(projectileObject, guns.rightGun.transform.position, Vector3.zero);
+            case 2:           
+                EnableBulletShot(objectPool.GetPooledObject(), guns.rightGun.transform.position, Vector3.zero);
                 guns.leftGunVFX.Play();
-                CreateLazerShot(projectileObject, guns.leftGun.transform.position, Vector3.zero);
+               
+                EnableBulletShot(objectPool.GetPooledObject(), guns.leftGun.transform.position, Vector3.zero);
                 guns.rightGunVFX.Play();
                 break;
-            case 3:
-                CreateLazerShot(projectileObject, guns.centralGun.transform.position, Vector3.zero);
-                CreateLazerShot(projectileObject, guns.rightGun.transform.position, new Vector3(0, 0, -5));
+            case 3:              
+                EnableBulletShot(objectPool.GetPooledObject(), guns.centralGun.transform.position, Vector3.zero);
+                EnableBulletShot(objectPool.GetPooledObject(), guns.rightGun.transform.position, new Vector3(0, 0, -5));
                 guns.leftGunVFX.Play();
-                CreateLazerShot(projectileObject, guns.leftGun.transform.position, new Vector3(0, 0, 5));
+                EnableBulletShot(objectPool.GetPooledObject(), guns.leftGun.transform.position, new Vector3(0, 0, 5));
                 guns.rightGunVFX.Play();
                 break;
             case 4:
-                CreateLazerShot(projectileObject, guns.centralGun.transform.position, Vector3.zero);
-                CreateLazerShot(projectileObject, guns.rightGun.transform.position, new Vector3(0, 0, -5));
+                EnableBulletShot(objectPool.GetPooledObject(), guns.centralGun.transform.position, Vector3.zero);
+                EnableBulletShot(objectPool.GetPooledObject(), guns.rightGun.transform.position, new Vector3(0, 0, -5));
                 guns.leftGunVFX.Play();
-                CreateLazerShot(projectileObject, guns.leftGun.transform.position, new Vector3(0, 0, 5));
+                EnableBulletShot(objectPool.GetPooledObject(), guns.leftGun.transform.position, new Vector3(0, 0, 5));
                 guns.rightGunVFX.Play();
-                CreateLazerShot(projectileObject, guns.leftGun.transform.position, new Vector3(0, 0, 15));
-                CreateLazerShot(projectileObject, guns.rightGun.transform.position, new Vector3(0, 0, -15));
+                EnableBulletShot(objectPool.GetPooledObject(), guns.leftGun.transform.position, new Vector3(0, 0, 15));
+                EnableBulletShot(objectPool.GetPooledObject(), guns.rightGun.transform.position, new Vector3(0, 0, -15));
                 break;
         }
     }
 
-    void CreateLazerShot(GameObject lazer, Vector3 pos, Vector3 rot) //translating 'pooled' lazer shot to the defined position in the defined rotation
-    {
-        Instantiate(lazer, pos, Quaternion.Euler(rot));
+    void EnableBulletShot(GameObject lazer, Vector3 pos, Vector3 rot) //translating 'pooled' lazer shot to the defined position in the defined rotation
+    {       
+        if(lazer!=null)
+        {
+            lazer.transform.SetPositionAndRotation(pos, Quaternion.Euler(rot));
+            lazer.SetActive(true);
+        }       
     }
 
     #endregion

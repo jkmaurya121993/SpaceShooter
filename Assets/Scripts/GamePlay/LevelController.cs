@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,9 +25,6 @@ public class LevelController : MonoBehaviour {
 
     public GameObject powerUp;
     public float timeForNewPowerup;
-    public GameObject[] planets;
-    public float timeBetweenPlanets;
-    public float planetsSpeed;
 
     #endregion
 
@@ -40,20 +38,16 @@ public class LevelController : MonoBehaviour {
 
     int powerCount = 0;
 
-    List<GameObject> planetsList = new List<GameObject>();
-
     Camera mainCamera;
 
     #endregion
-
+   
     private void Start()
     {
         mainCamera = Camera.main;
         //for each element in 'enemyWaves' array creating coroutine which generates the wave
-
+      
         InitTheWave(delayForEnemy);
-        
-      //  StartCoroutine(PlanetsCreation());
     }
 
     private void Shuffle(EnemyWaves[] array)
@@ -117,16 +111,18 @@ public class LevelController : MonoBehaviour {
     //endless coroutine generating 'levelUp' bonuses. 
     IEnumerator PowerupBonusCreation() 
     {
-
         yield return new WaitForSeconds(timeForNewPowerup);
-        Instantiate(
-            powerUp,
-            //Set the position for the new bonus: for X-axis - random position between the borders of 'Player's' movement; for Y-axis - right above the upper screen border 
-            new Vector2(
-                Random.Range(PlayerMoving.instance.borders.minX, PlayerMoving.instance.borders.maxX), 
-                mainCamera.ViewportToWorldPoint(Vector2.up).y + powerUp.GetComponent<Renderer>().bounds.size.y / 2), 
-            Quaternion.identity
-            );
+        try
+        {          
+            Instantiate(powerUp, new Vector2(
+                   Random.Range(PlayerMoving.instance.borders.minX, PlayerMoving.instance.borders.maxX),
+                    mainCamera.ViewportToWorldPoint(Vector2.up).y + powerUp.GetComponent<Renderer>().bounds.size.y / 2),
+                Quaternion.identity);
+        }
+        catch(System.Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
        
 }

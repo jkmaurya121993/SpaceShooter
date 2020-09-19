@@ -9,27 +9,19 @@ using UnityEngine.UI;
 public class MenuHandler : MonoBehaviour
 {
     #region SERIALIZE FILEDS
-
-    [SerializeField] GameObject settingPanel;
-
     [SerializeField] Text scoreText;
-
     #endregion
 
     #region PRIVATE FIELDS
-
-   
-    GameManager gameManager;
-
-    int score;
-
+     private GameManager gameManager;
+     private int score;
     #endregion
 
     #region UNITY METHODS
 
     private void Start()
     {
-        gameManager = GameManager.GetInstance();
+        gameManager = GameManager.Instance;
 
         gameManager.SetGameState(GAMESTATE.UI);
 
@@ -42,17 +34,19 @@ public class MenuHandler : MonoBehaviour
     #endregion
 
     #region BUTTONS ACTIONS
-
-    // Button Action for play
-    public void OnClickPlay()
+    ///<summary>
+    /// Button Action for play
+    /// </summary>
+    public void OnClickPlayButton()
     {
         gameManager.PlayAudio(AUDIOTYPE.BUTTON);
 
         SceneManager.LoadSceneAsync((int)GAMESTATE.GAMEPLAY );   
     }
-
-    // Button Action for Quit
-    public void OnClickQuit()
+    ///<summary>
+    /// Button Action for Quit
+    /// </summary>
+    public void OnClickQuitButton()
     {
         gameManager.PlayAudio(AUDIOTYPE.BUTTON);
 

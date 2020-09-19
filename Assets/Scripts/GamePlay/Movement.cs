@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// This script moves the attached object along the Y-axis with the defined speed
 /// </summary>
-public class DirectMoving : MonoBehaviour {
+public class Movement : MonoBehaviour {
 
     [Tooltip("Moving speed on Y axis in local space")]
     public float speed;
