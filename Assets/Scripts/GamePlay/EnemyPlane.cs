@@ -4,19 +4,14 @@
 /// This script defines 'Enemy's' health and behavior. 
 /// </summary>
 
-public class Enemy : MonoBehaviour {
+public class EnemyPlane : MonoBehaviour {
 
     #region PUBLIC FIELDS
     [Tooltip("Health points in integer")]
     public int health;
-
-    [Tooltip("Enemy's projectile prefab")]
-    public GameObject Projectile;
-
     [Tooltip("VFX prefab generating after destruction")]
     public GameObject destructionVFX;
     public GameObject hitEffect;
-
     /// <summary>
     /// probability of 'Enemy's' shooting during the path
     /// </summary>
@@ -25,11 +20,14 @@ public class Enemy : MonoBehaviour {
     /// <summary>
     /// max and min time for shooting from the beginning of the path
     /// </summary>
-    [HideInInspector] public float shotTimeMin, shotTimeMax; 
-
+    [HideInInspector] public float shotTimeMin, shotTimeMax;
     #endregion
+    
+    private GameObject enemyWeapon;
+    [SerializeField] private ScriptableObjectData weaponData;
     private void Start()
     {
+        enemyWeapon = weaponData.enemyWeapon[Random.Range(0,4)];
         Invoke("ActivateShooting", Random.Range(shotTimeMin, shotTimeMax));
        
     }
@@ -40,8 +38,9 @@ public class Enemy : MonoBehaviour {
     void ActivateShooting() 
     {
         if (Random.value < (float)shotChance / 100)                             //if random value less than shot probability, make a shot
-        {           
-            Instantiate(Projectile, gameObject.transform.position, Quaternion.identity);
+        {
+
+            Instantiate(enemyWeapon, gameObject.transform.position, Quaternion.identity);
         }
     }
 
@@ -68,8 +67,8 @@ public class Enemy : MonoBehaviour {
     {
         if (collision.tag == "Player")
         {
-            if (Projectile.GetComponent<TriggerHandler>() != null)
-                Player.instance.GetDamage(Projectile.GetComponent<TriggerHandler>().damage);
+            if (enemyWeapon.GetComponent<TriggerHandler>() != null)
+                Player.instance.GetDamage(enemyWeapon.GetComponent<TriggerHandler>().damage);
             else
                 Player.instance.GetDamage(1);
         }

@@ -136,19 +136,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bce8ed9b64f39c44bdd9d3b9f6debe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1373690366928948, guid: fdaaab53a8b4c0143b19d2a2e4007e44, type: 3}
   count: 6
   speed: 30
-  timeBetween: 0.5
+  delay: 0.5
   pathPoints:
   - {fileID: 4858740230125270}
   - {fileID: 4763388724871704}
   - {fileID: 4077947979731864}
-  rotationByPath: 0
-  Loop: 0
-  pathColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   shooting:
-    shotChance: 40
-    shotTimeMin: 0.6
-    shotTimeMax: 2.6
-  testMode: 0
+    fireChance: 40
+    minTime: 0.55
+    maxTime: 2.7
+  objectData: {fileID: 11400000, guid: 7058d286b1d957f4eb0b8c1763374efd, type: 2}

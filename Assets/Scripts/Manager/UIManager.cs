@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     #region PUBLIC FIELDS
 
     [Header("Player Health and level up UI")]
-    [SerializeField] Image healthImage;
+    [SerializeField] Image healthBar;
     [SerializeField] Text scoreText;
     [SerializeField] GameObject gameOver;
     [SerializeField] Text message;
@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
     /// <param name="maxHealth"></paramx
     public void SetPlayerHealth(float damage,float maxHealth)
     {
-        healthImage.fillAmount = healthImage.fillAmount - ((float)damage / maxHealth);
+        healthBar.fillAmount = healthBar.fillAmount - ((float)damage / maxHealth);
     }
 
     /// <summary>

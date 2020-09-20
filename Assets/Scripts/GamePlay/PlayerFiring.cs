@@ -10,7 +10,7 @@ public class Guns
     [HideInInspector] public ParticleSystem leftGunVFX, rightGunVFX, centralGunVFX; 
 }
 
-public class PlayerShooting : MonoBehaviour {
+public class PlayerFiring : MonoBehaviour {
 
     #region PUBLIC FIELDS
 
@@ -30,7 +30,7 @@ public class PlayerShooting : MonoBehaviour {
     public Guns guns;
     bool shootingIsActive = true; 
     [HideInInspector] public int maxweaponPower = 4; 
-    public static PlayerShooting instance;
+    public static PlayerFiring instance;
 
     #endregion
 

@@ -258,13 +258,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 271878661, guid: 8e33fda0c220936498f5288af83d7450, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c7c7b0ec26b1c4d108be9774f90099d8, type: 3}
     - target: {fileID: 1510184446397956, guid: 8e33fda0c220936498f5288af83d7450, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player_Ship
       objectReference: {fileID: 0}
     - target: {fileID: 4923957858404230, guid: 8e33fda0c220936498f5288af83d7450, type: 3}
       propertyPath: m_LocalPosition.x
@@ -309,31 +305,6 @@ PrefabInstance:
     - target: {fileID: 4923957858404230, guid: 8e33fda0c220936498f5288af83d7450, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 61072580455120420, guid: 8e33fda0c220936498f5288af83d7450,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.12091708
-      objectReference: {fileID: 0}
-    - target: {fileID: 61072580455120420, guid: 8e33fda0c220936498f5288af83d7450,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 7.5389867
-      objectReference: {fileID: 0}
-    - target: {fileID: 61072580455120420, guid: 8e33fda0c220936498f5288af83d7450,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.26601255
-      objectReference: {fileID: 0}
-    - target: {fileID: 61072580455120420, guid: 8e33fda0c220936498f5288af83d7450,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 4.433772
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642073701102404, guid: 8e33fda0c220936498f5288af83d7450,
-        type: 3}
-      propertyPath: poolingController
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114960433178452790, guid: 8e33fda0c220936498f5288af83d7450,
         type: 3}
@@ -1391,7 +1362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e10232deb46c4368bf318f39fa151f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthImage: {fileID: 1952776383}
+  healthBar: {fileID: 1952776383}
   scoreText: {fileID: 651414689}
   gameOver: {fileID: 2098591602}
   message: {fileID: 1334816401}

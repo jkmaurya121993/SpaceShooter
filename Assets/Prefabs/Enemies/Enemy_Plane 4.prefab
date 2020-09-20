@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 114640587493707362}
   - component: {fileID: 50267448758737772}
   m_Layer: 0
-  m_Name: Enemy_Ship
+  m_Name: Enemy_Ship 4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 1152134415
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d315c560b1433954a94f7f282f19514f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a417e6a54b487a46b745e8f4eb70174, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,13 +98,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  Projectile: {fileID: 1728936453619090, guid: 9610b32634c0355409b4b5991571a66b, type: 3}
   destructionVFX: {fileID: 1280240331523082, guid: 45ae5851ef2832044bba82850372d67b,
     type: 3}
   hitEffect: {fileID: 1256001557233130, guid: 2dd0bdb7830e6644da169b32252dca96, type: 3}
   shotChance: 100
   shotTimeMin: 10
   shotTimeMax: 30
+  weaponData: {fileID: 11400000, guid: 7058d286b1d957f4eb0b8c1763374efd, type: 2}
 --- !u!58 &58425179734721642
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,14 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb55924fc8ef444409698fed6ae69676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  pathPoints: []
   speed: 25
-  rotationByPath: 1
-  loop: 1
-  movingIsActive: 0
+  isObjectMoving: 0
 --- !u!50 &50267448758737772
 Rigidbody2D:
   serializedVersion: 4

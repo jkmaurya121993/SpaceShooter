@@ -123,7 +123,7 @@ public class LevelController : MonoBehaviour {
         try
         {          
             Instantiate(powerUp, new Vector2(
-                   Random.Range(PlayerMoving.instance.borders.minX, PlayerMoving.instance.borders.maxX),
+                   Random.Range(PlayerMovement.instance.borders.minX, PlayerMovement.instance.borders.maxX),
                     mainCamera.ViewportToWorldPoint(Vector2.up).y + powerUp.GetComponent<Renderer>().bounds.size.y / 2),
                 Quaternion.identity);
         }

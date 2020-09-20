@@ -10,9 +10,9 @@ public class PowerUp : MonoBehaviour {
     {
         if (collision.tag == "Player") 
         {
-            if (PlayerShooting.instance.weaponPower < PlayerShooting.instance.maxweaponPower)
+            if (PlayerFiring.instance.weaponPower < PlayerFiring.instance.maxweaponPower)
             {
-                PlayerShooting.instance.weaponPower++;
+                PlayerFiring.instance.weaponPower++;
             }
             Destroy(gameObject);
         }

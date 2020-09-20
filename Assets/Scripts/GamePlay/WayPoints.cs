@@ -8,56 +8,50 @@ using System;
 /// </summary>
 public class WayPoints : MonoBehaviour {
         
-    [HideInInspector] public Transform [] path; //path points which passes the 'Enemy' 
-    [HideInInspector] public float speed; 
-    [HideInInspector] public bool rotationByPath;   //whether 'Enemy' rotates in path direction or not
-    [HideInInspector] public bool loop;         //if loop is true, 'Enemy' returns to the path starting point after completing the path
+    [HideInInspector] public Transform [] pathPoints; //path points which passes the 'Enemy' 
+    [HideInInspector] public float speed;
     float currentPathPercent;               //current percentage of completing the path
-    Vector3[] pathPositions;                //path points in vector3
-    [HideInInspector] public bool movingIsActive;   //whether 'Enemy' moves or not
+    Vector3[] pathPositions;               
+    [HideInInspector] public bool isObjectMoving;   //whether 'Enemy' moves or not
 
-    //setting path parameters for the 'Enemy' and sending the 'Enemy' to the path starting point
+    /// <summary>
+    /// setting path parameters for the 'Enemy' and sending the 'Enemy' to the path starting point
+    /// </summary>
+    
     public void SetPath() 
     {
         currentPathPercent = 0;
-        pathPositions = new Vector3[path.Length];       //transform path points to vector3
+        pathPositions = new Vector3[pathPoints.Length];       //transform path points to vector3
         for (int i = 0; i < pathPositions.Length; i++)
         {
-            pathPositions[i] = path[i].position;
+            pathPositions[i] = pathPoints[i].position;
         }
         transform.position = NewPositionByPath(pathPositions, 0); //sending the enemy to the path starting point
-        if (!rotationByPath)
-            transform.rotation = Quaternion.identity;
-        movingIsActive = true;
+        isObjectMoving = true;
     }
 
     private void Update()
     {
-        if (movingIsActive)
+        if (isObjectMoving)
         {
             currentPathPercent += speed / 100 * Time.deltaTime;     //every update calculating current path percentage according to the defined speed
 
             transform.position = NewPositionByPath(pathPositions, currentPathPercent); //moving the 'Enemy' to the path position, calculated in method NewPositionByPath
-            if (rotationByPath)                            //rotating the 'Enemy' in path direction, if set 'rotationByPath'
-            {
-                transform.right = Interpolate(CreatePoints(pathPositions), currentPathPercent + 0.01f) - transform.position;
-                transform.Rotate(Vector3.forward * 90);
-            }
+
+            transform.right = Interpolate(CreatePathPoints(pathPositions), currentPathPercent + 0.01f) - transform.position;
+            
+            transform.Rotate(Vector3.forward * -90);   
+           
             if (currentPathPercent > 1)                    //when the path is complete
-            {
-                if (loop)                                   //when loop is set, moving to the path starting point; if not, destroying or deactivating the 'Enemy'
-                    currentPathPercent = 0;
-                else
-                {
-                    Destroy(gameObject);           
-                }
+            {                           
+               Destroy(gameObject);                           
             }
         }
     }
 
     Vector3 NewPositionByPath(Vector3 [] pathPos, float percent) 
     {
-        return Interpolate(CreatePoints(pathPos), currentPathPercent);
+        return Interpolate(CreatePathPoints(pathPos), currentPathPercent);
     }
 
     Vector3 Interpolate(Vector3[] path, float t) 
@@ -72,25 +66,16 @@ public class WayPoints : MonoBehaviour {
         return 0.5f * ((-a + 3f * b - 3f * c + d) * (u * u * u) + (2f * a - 5f * b + 4f * c - d) * (u * u) + (-a + c) * u + 2f * b);
     }
 
-    Vector3[] CreatePoints(Vector3[] path) 
+    Vector3[] CreatePathPoints(Vector3[] path) 
     {
         Vector3[] pathPositions;
-        Vector3[] newPathPos;
+        Vector3[] newPathPosition;
         int dist = 2;
         pathPositions = path;
-        newPathPos = new Vector3[pathPositions.Length + dist];
-        Array.Copy(pathPositions, 0, newPathPos, 1, pathPositions.Length);
-        newPathPos[0] = newPathPos[1] + (newPathPos[1] - newPathPos[2]);
-        newPathPos[newPathPos.Length - 1] = newPathPos[newPathPos.Length - 2] + (newPathPos[newPathPos.Length - 2] - newPathPos[newPathPos.Length - 3]);
-        if (newPathPos[1] == newPathPos[newPathPos.Length - 2])
-        {
-            Vector3[] LoopSpline = new Vector3[newPathPos.Length];
-            Array.Copy(newPathPos, LoopSpline, newPathPos.Length);
-            LoopSpline[0] = LoopSpline[LoopSpline.Length - 3];
-            LoopSpline[LoopSpline.Length - 1] = LoopSpline[2];
-            newPathPos = new Vector3[LoopSpline.Length];
-            Array.Copy(LoopSpline, newPathPos, LoopSpline.Length);
-        }
-        return (newPathPos);
+        newPathPosition = new Vector3[pathPositions.Length + dist];
+        Array.Copy(pathPositions, 0, newPathPosition, 1, pathPositions.Length);
+        newPathPosition[0] = newPathPosition[1] + (newPathPosition[1] - newPathPosition[2]);
+        newPathPosition[newPathPosition.Length - 1] = newPathPosition[newPathPosition.Length - 2] + (newPathPosition[newPathPosition.Length - 2] - newPathPosition[newPathPosition.Length - 3]);
+        return (newPathPosition);
     }
 }

@@ -14,14 +14,14 @@ public class Borders
     [HideInInspector] public float minX, maxX, minY, maxY;
 }
 
-public class PlayerMoving : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
 
     [Tooltip("offset from viewport borders for player's movement")]
     public Borders borders;
     Camera mainCamera;
     bool controlIsActive = true; 
 
-    public static PlayerMoving instance; //unique instance of the script for easy access to the script
+    public static PlayerMovement instance; //unique instance of the script for easy access to the script
 
     private void Awake()
     {

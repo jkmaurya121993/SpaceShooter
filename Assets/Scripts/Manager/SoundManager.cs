@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum AUDIOTYPE
+{
+    BUTTON,
+    PLAYERSHOT,
+    EXPLOSION
+}
 public class SoundManager : MonoBehaviour
 {
+   
     #region SERIALIZE FIELDS
 
     [SerializeField] AudioClip buttonAudio;

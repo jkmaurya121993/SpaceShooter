@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
 {
     #region PUBLIC FIELDS
 
-    [Tooltip("Health points in integer and UI")]
-    [SerializeField] int health;
+    [Tooltip("Health of Player")]
+    [SerializeField] int playerHealth;
  
     [Tooltip("VFX Prefab Refernces")]
     [SerializeField] GameObject destructionFX;
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     Vector3 initialPosition;
 
-    int score;
+    int playerScore;
 
     #endregion
 
@@ -40,9 +40,7 @@ public class Player : MonoBehaviour
 
         initialPosition = transform.position;
 
-        maxHealth = health;
-
-        GetComponent<AudioSource>().mute = GameManager.Instance.isAudioOff;
+        maxHealth = playerHealth;
     }
 
     #endregion
@@ -56,9 +54,9 @@ public class Player : MonoBehaviour
     {
         uIManager.SetPlayerHealth(damage, maxHealth);
         
-        health -= damage;           //reducing health for damage value, if health is less than 0, Destroy player
+        playerHealth -= damage;           //reducing health for damage value, if health is less than 0, Destroy player
 
-        if (health <= 0)
+        if (playerHealth <= 0)
         {
             Destruction();
         }
@@ -76,9 +74,9 @@ public class Player : MonoBehaviour
     /// <param name="scoreValue"></param> 
     public void SetScore(int scoreValue)
     {
-        score += scoreValue;
+        playerScore += scoreValue;
 
-        uIManager.SetScore(score);
+        uIManager.SetScore(playerScore);
     }
 
     #endregion
@@ -94,9 +92,9 @@ public class Player : MonoBehaviour
 
         int previousScore = PlayerPrefs.GetInt(GameManager.highestScoreKey);
 
-        if (previousScore < score)
+        if (previousScore < playerScore)
         {
-            PlayerPrefs.SetInt(GameManager.highestScoreKey, score);
+            PlayerPrefs.SetInt(GameManager.highestScoreKey, playerScore);
         }
 
         uIManager.GameOver();

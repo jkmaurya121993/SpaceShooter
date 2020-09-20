@@ -1101,7 +1101,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1906950169585904, guid: 5a213a4dde83c404f8856922c5fc08ff, type: 3}
       propertyPath: m_Name
-      value: Backgrounds
+      value: Background
       objectReference: {fileID: 0}
     - target: {fileID: 1906950169585904, guid: 5a213a4dde83c404f8856922c5fc08ff, type: 3}
       propertyPath: m_IsActive
@@ -1326,7 +1326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45ef599ba4ee41f98458c966309aaa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAudioOff: 0
   soundManager: {fileID: 1973253125}
 --- !u!1 &1973253122
 GameObject:

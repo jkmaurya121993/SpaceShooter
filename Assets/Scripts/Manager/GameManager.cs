@@ -6,24 +6,16 @@ public enum GAMESTATE
     UI = 0,
     GAMEPLAY = 1
 }
-public enum AUDIOTYPE
-{
-    BUTTON,
-    PLAYERSHOT,
-    EXPLOSION
-}
 
 /// <summary>
-/// Scripts handle the game state and the sound.
+/// Scripts handle the game state .
 /// </summary>
 
 public sealed class GameManager : MonoBehaviour
 {
     #region PUBLIC FIELDS
 
-    [HideInInspector] public bool isAudioOff = false;
-
-    public const string  highestScoreKey = "HighestScore";
+    public const string  highestScoreKey = "HighestScoreKey";
 
     #endregion
 
@@ -77,7 +69,7 @@ public sealed class GameManager : MonoBehaviour
     }
 
     // Plays common audios
-    public void PlayAudio(AUDIOTYPE type, bool isLoop = false, float volume = 1)
+    public void PlayAudio( AUDIOTYPE type, bool isLoop = false, float volume = 1)
     {
         soundManager.PlayAudio(type, isLoop, volume);
     }
