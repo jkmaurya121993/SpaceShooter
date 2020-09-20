@@ -17,9 +17,15 @@ public class Enemy : MonoBehaviour {
     public GameObject destructionVFX;
     public GameObject hitEffect;
 
-    [HideInInspector] public int shotChance; //probability of 'Enemy's' shooting during tha path
+    /// <summary>
+    /// probability of 'Enemy's' shooting during the path
+    /// </summary>
+    [HideInInspector] public int shotChance;
 
-    [HideInInspector] public float shotTimeMin, shotTimeMax; //max and min time for shooting from the beginning of the path
+    /// <summary>
+    /// max and min time for shooting from the beginning of the path
+    /// </summary>
+    [HideInInspector] public float shotTimeMin, shotTimeMax; 
 
     #endregion
     private void Start()
@@ -28,28 +34,36 @@ public class Enemy : MonoBehaviour {
        
     }
 
-    // making a shot
-    void ActivateShooting(float range) 
+    /// <summary>
+    /// making a shot
+    /// </summary> 
+    void ActivateShooting() 
     {
-        if (range < (float)shotChance / 100)                             //if random value less than shot probability, making a shot
+        if (Random.value < (float)shotChance / 100)                             //if random value less than shot probability, make a shot
         {           
             Instantiate(Projectile, gameObject.transform.position, Quaternion.identity);
         }
     }
 
-    //method of getting damage for the 'Enemy'
+    /// <summary>
+    /// method of getting damage for the 'Enemy'
+    /// </summary>
+    /// <param name="damage"></param>
     public void GetDamage(int damage) 
     {
-        health -= damage;           //reducing health for damage value, if health is less than 0, starting destruction procedure
+        health -= damage;           //reducing health for damage value, if health is less than 0, destroy object
         if (health <= 0)
-            Destruction();
+            DestroyEnemyObject();
         else
         {        
            Instantiate(hitEffect, transform.position, Quaternion.identity, transform);
         }
-    }    
+    }
 
-    //if 'Enemy' collides 'Player', 'Player' gets the damage equal to projectile's damage value
+    /// <summary>
+    /// if 'Enemy' collides 'Player', 'Player' gets the damage equal to projectile's damage value
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -60,9 +74,10 @@ public class Enemy : MonoBehaviour {
                 Player.instance.GetDamage(1);
         }
     }
-
-    //method of destroying the 'Enemy'
-    void Destruction()                           
+    /// <summary>
+    /// method of destroying the 'Enemy'
+    /// </summary>
+    void DestroyEnemyObject()                           
     {
         GameManager.Instance.PlayAudio(AUDIOTYPE.EXPLOSION);
         Instantiate(destructionVFX, transform.position, Quaternion.identity);      

@@ -7,15 +7,18 @@
 public class Boundary : MonoBehaviour {
 
     BoxCollider2D boundareCollider;
+    /// <summary>
+    ///  receiving collider's component and changing boundary borders
+    /// </summary>
 
-    //receiving collider's component and changing boundary borders
     private void Start()
     {
         boundareCollider = GetComponent<BoxCollider2D>();
         ResizeCollider();
     }
-
-    //changing the collider's size up to Viewport's size multiply 1.5
+    /// <summary>
+    /// changing the collider's size up to Viewport's size multiply 1.5
+    /// </summary>
     void ResizeCollider() 
     {        
         Vector2 viewportSize = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)) * 2;
@@ -24,7 +27,10 @@ public class Boundary : MonoBehaviour {
         boundareCollider.size = viewportSize;
     }
 
-    //when another object leaves collider
+    /// <summary>
+    /// when another object leaves collider
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision) 
     {        
         if (collision.tag == "Bullet")

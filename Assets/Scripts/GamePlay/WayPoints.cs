@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// This script moves the ‘Enemy’ along the defined path.
 /// </summary>
-public class FollowThePath : MonoBehaviour {
+public class WayPoints : MonoBehaviour {
         
     [HideInInspector] public Transform [] path; //path points which passes the 'Enemy' 
     [HideInInspector] public float speed; 

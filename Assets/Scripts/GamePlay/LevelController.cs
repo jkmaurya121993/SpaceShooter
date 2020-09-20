@@ -20,9 +20,8 @@ public class LevelController : MonoBehaviour {
 
     #region PUBLIC FEILDS
     [SerializeField] UIManager uIManager;
-    //Serializable classes implements
-    public EnemyWaves[] enemyWaves; 
 
+    public EnemyWaves[] enemyWaves; 
     public GameObject powerUp;
     public float timeForNewPowerup;
 
@@ -46,8 +45,8 @@ public class LevelController : MonoBehaviour {
     {
         mainCamera = Camera.main;
         //for each element in 'enemyWaves' array creating coroutine which generates the wave
-      
-        InitTheWave(delayForEnemy);
+
+        InitialiseTheWave(delayForEnemy);
     }
 
     private void Shuffle(EnemyWaves[] array)
@@ -63,7 +62,7 @@ public class LevelController : MonoBehaviour {
         }
     }
 
-    void InitTheWave(float delay)
+    void InitialiseTheWave(float delay)
     {
         for (int i = 0; i < enemyWaves.Length; i++)
         {
@@ -79,7 +78,13 @@ public class LevelController : MonoBehaviour {
         }
     }
 
-    //Create a new wave after a delay
+    /// <summary>
+    /// Create a new wave after a delay
+    /// </summary>
+    /// <param name="delay"></param>
+    /// <param name="Wave"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
     IEnumerator CreateEnemyWave(float delay, GameObject Wave,int index) 
     {
         if (delay != 0)
@@ -101,14 +106,17 @@ public class LevelController : MonoBehaviour {
 
                 delayForEnemy = delayForEnemy > 1 ? delayForEnemy : 4;
 
-                InitTheWave(--delayForEnemy);
+                InitialiseTheWave(--delayForEnemy);
 
             }
 
         }
     }
 
-    //endless coroutine generating 'levelUp' bonuses. 
+    /// <summary>
+    /// This coroutine will create PowerUp after Levelup
+    /// </summary>
+    /// <returns></returns>
     IEnumerator PowerupBonusCreation() 
     {
         yield return new WaitForSeconds(timeForNewPowerup);

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public static ObjectPool SharedInstance;
-    public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
+   public static ObjectPool SharedInstance;
+   #region SerializeField
+   [SerializeField] private List<GameObject> pooledObjects;
+   [SerializeField] private GameObject objectToPool;
+   [SerializeField] private int amountToPool;
+    #endregion
 
+    #region Unity Method
     private void Awake()
     {
         SharedInstance = this;
@@ -25,7 +28,12 @@ public class ObjectPool : MonoBehaviour
             pooledObjects.Add(newitem);
         }
     }
+    #endregion
 
+    /// <summary>
+    /// Method to getting pool object
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetPooledObject()
     {
         for(int i=0;i<amountToPool;i++)

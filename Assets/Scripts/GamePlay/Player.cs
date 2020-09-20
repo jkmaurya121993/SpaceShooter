@@ -48,13 +48,15 @@ public class Player : MonoBehaviour
     #endregion
 
     #region PUBLIC METHODS
-
-    //method for damage proceccing by 'Player'
+    /// <summary>
+    /// method for damage proceccing by 'Player'
+    /// </summary>
+    /// <param name="damage"></param>
     public void GetDamage(int damage)   
     {
         uIManager.SetPlayerHealth(damage, maxHealth);
         
-        health -= damage;           //reducing health for damage value, if health is less than 0, starting destruction procedure
+        health -= damage;           //reducing health for damage value, if health is less than 0, Destroy player
 
         if (health <= 0)
         {
@@ -68,8 +70,10 @@ public class Player : MonoBehaviour
 
         }
     }
-
-    // score calculation
+    /// <summary>
+    /// score calculation
+    /// </summary>
+    /// <param name="scoreValue"></param> 
     public void SetScore(int scoreValue)
     {
         score += scoreValue;
@@ -100,7 +104,6 @@ public class Player : MonoBehaviour
         Time.timeScale = 0;
 
         Instantiate(destructionFX, transform.position, Quaternion.identity); //generating destruction visual effect and destroying the 'Player' object
-       // gameObject.SetActive(false);
         Destroy(gameObject);
     }
     #endregion

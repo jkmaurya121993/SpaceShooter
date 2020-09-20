@@ -38,39 +38,44 @@ public class UIManager : MonoBehaviour
 
     }
 
-    #region PRIVATE METHODS
-
-  
-    #endregion
-
     #region PUBLIC FIELDS
 
     public void GameOver()
     {
         gameOver.SetActive(true);
     }
-
-    // Set the player health UI
+    /// <summary>
+    /// Set the player Health UI
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="maxHealth"></paramx
     public void SetPlayerHealth(float damage,float maxHealth)
     {
         healthImage.fillAmount = healthImage.fillAmount - ((float)damage / maxHealth);
     }
 
-    // shows the score
+    /// <summary>
+    /// Display the player score
+    /// </summary>
+    /// <param name="score"></param> 
     public void SetScore(int score)
     {
         scoreText.text = "Score:- " + score.ToString();
     }
 
-    // Button action for Restart
+    /// <summary>
+    ///  Button action for Restart
+    /// </summary>
     public void RestartGame()
     {
         Time.timeScale = 1;
         gameManager.PlayAudio(AUDIOTYPE.BUTTON);
         SceneManager.LoadScene((int)GAMESTATE.GAMEPLAY);
     }
-    
-    // Button Action for Menu
+
+    /// <summary>
+    /// Button Action for Menu
+    /// </summary>
     public void BackToMenu()
     {
         Time.timeScale = 1;
@@ -87,7 +92,10 @@ public class UIManager : MonoBehaviour
 
     #region COROUTINES
 
-    // Scale the level up image to 1.
+    /// <summary>
+    /// Scale the level up image to 1.
+    /// </summary>
+    /// <returns></returns> 
     IEnumerator scaleUp()
     {
         float duration=1;
@@ -105,8 +113,10 @@ public class UIManager : MonoBehaviour
 
         StartCoroutine(MoveLevelUp());
     }
-
-    // Move the level up image to top
+    /// <summary>
+    /// Move the level up image to top
+    /// </summary>
+    /// <returns></returns> 
     IEnumerator MoveLevelUp()
     {
         float duration = 1.5f;

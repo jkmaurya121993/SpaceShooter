@@ -32,14 +32,14 @@ public class PlayerMoving : MonoBehaviour {
     private void Start()
     {
         mainCamera = Camera.main;
-        ResizeBorders();                //setting 'Player's' moving borders deending on Viewport's size
+        ResizeBorders();                //setting 'Player's' moving borders depending on Viewport's size
     }
 
     private void Update()
     {
         if (controlIsActive)
         {
-#if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
+            #if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling
 
             if (Input.GetMouseButton(0)) //if mouse button was pressed       
             {
@@ -47,9 +47,9 @@ public class PlayerMoving : MonoBehaviour {
                 mousePosition.z = transform.position.z;
                 transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
             }
-#endif
+            #endif
 
-#if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
+            #if UNITY_IOS || UNITY_ANDROID //if current platform is Mobile, 
 
             if (Input.touchCount == 1) // if there is a touch
             {
@@ -58,7 +58,7 @@ public class PlayerMoving : MonoBehaviour {
                 touchPosition.z = transform.position.z;
                 transform.position = Vector3.MoveTowards(transform.position, touchPosition, 30 * Time.deltaTime);
             }
-#endif
+            #endif
             transform.position = new Vector3    //if 'Player' crossed the movement borders, returning him back 
                 (
                 Mathf.Clamp(transform.position.x, borders.minX, borders.maxX),
@@ -68,7 +68,9 @@ public class PlayerMoving : MonoBehaviour {
         }
     }
 
-    //setting 'Player's' movement borders according to Viewport size and defined offset
+    /// <summary>
+    /// setting 'Player's' movement borders according to Viewport size and defined offset
+    /// </summary>
     void ResizeBorders() 
     {
         borders.minX = mainCamera.ViewportToWorldPoint(Vector2.zero).x + borders.minXOffset;

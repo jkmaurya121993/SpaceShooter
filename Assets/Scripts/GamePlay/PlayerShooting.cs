@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+/// <summary>
+/// Guns objects in 'Player's' hierarchy
+/// </summary>
 
-//guns objects in 'Player's' hierarchy
 [System.Serializable]
 public class Guns
 {
@@ -18,11 +20,11 @@ public class PlayerShooting : MonoBehaviour {
     [Tooltip("projectile prefab")]
     public GameObject projectileObject;
 
-    //time for a new shot
+    //Time for a new shot
     [HideInInspector] public float nextFire;
 
     [Tooltip("current weapon power")]
-    [Range(1, 4)]       //change it if you wish
+    [Range(1, 4)]       
     public int weaponPower = 1; 
 
     public Guns guns;
@@ -73,7 +75,7 @@ public class PlayerShooting : MonoBehaviour {
     #region PRIVATE METHODS
     /// <summary>
     /// method for a shot
-    /// According to weaponPower bullet shot will creat
+    /// According to weaponPower bullet shot will create
     /// </summary>
 
     private void CreatBulletShot() 
@@ -110,7 +112,13 @@ public class PlayerShooting : MonoBehaviour {
         }
     }
 
-    void EnableBulletShot(GameObject lazer, Vector3 pos, Vector3 rot) //translating 'pooled' lazer shot to the defined position in the defined rotation
+    /// <summary>
+    /// translating 'pooled' lazer shot to the defined position in the defined rotation
+    /// </summary>
+    /// <param name="lazer"></param>
+    /// <param name="pos"></param>
+    /// <param name="rot"></param>
+    void EnableBulletShot(GameObject lazer, Vector3 pos, Vector3 rot) 
     {       
         if(lazer!=null)
         {

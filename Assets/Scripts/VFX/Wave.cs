@@ -63,7 +63,7 @@ public class Wave : MonoBehaviour {
         {
             GameObject newEnemy;
             newEnemy = Instantiate(enemy, enemy.transform.position, Quaternion.identity);
-            FollowThePath followComponent = newEnemy.GetComponent<FollowThePath>(); 
+            WayPoints followComponent = newEnemy.GetComponent<WayPoints>(); 
             followComponent.path = pathPoints;         
             followComponent.speed = speed;        
             followComponent.rotationByPath = rotationByPath;
@@ -89,8 +89,11 @@ public class Wave : MonoBehaviour {
     {
         DrawPath(pathPoints);  
     }
-
-    void DrawPath(Transform[] path) //drawing the path in the Editor
+    /// <summary>
+    /// drawing the path in the Editor
+    /// </summary>
+    /// <param name="path"></param>
+    void DrawPath(Transform[] path) 
     {
         Vector3[] pathPositions = new Vector3[path.Length];
         for (int i = 0; i < path.Length; i++)
@@ -110,6 +113,12 @@ public class Wave : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Bezier curve formula used to calculate Path
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="t"></param>
+    /// <returns></returns>
     Vector3 Interpolate(Vector3[] path, float t) 
     {
         int numSections = path.Length - 3;
@@ -122,7 +131,12 @@ public class Wave : MonoBehaviour {
         return 0.5f * ((-a + 3f * b - 3f * c + d) * (u * u * u) + (2f * a - 5f * b + 4f * c - d) * (u * u) + (-a + c) * u + 2f * b);
     }
 
-    Vector3[] CreatePoints(Vector3[] path)  //using interpolation method calculating the path along the path points
+    /// <summary>
+    /// using interpolation method calculating the path along the path points
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    Vector3[] CreatePoints(Vector3[] path)  
     {
         Vector3[] pathPositions;
         Vector3[] newPathPos;

@@ -2,7 +2,10 @@
 
 public class PowerUp : MonoBehaviour {
 
-    //when colliding with another object, if another objct is 'Player', sending command to the 'Player'
+    /// <summary>
+    /// when colliding with another object, if another objct is 'Player', sending command to the 'Player'
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.tag == "Player") 

@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] AudioClip explosionAudio;
 
-    [SerializeField] AudioSource source;
+    [SerializeField] AudioSource audio_source;
     #endregion
     private void Awake()
     {
@@ -20,25 +20,24 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayAudio(AUDIOTYPE type, bool isLoop = false, float volume = 1)
     {
-        //   source.mute = isAudioOff;
-        source.mute = false;
+        audio_source.mute = false;
         switch (type)
         {
             case AUDIOTYPE.BUTTON:
-                source.clip = buttonAudio;
+                audio_source.clip = buttonAudio;
                 break;
 
             case AUDIOTYPE.PLAYERSHOT:
-                source.clip = playerShootAudio;
+                audio_source.clip = playerShootAudio;
                 break;
 
             case AUDIOTYPE.EXPLOSION:
-                source.clip = explosionAudio;
+                audio_source.clip = explosionAudio;
                 break;
         }
 
-        source.volume = volume;
-        source.loop = isLoop;
-        source.Play();
+        audio_source.volume = volume;
+        audio_source.loop = isLoop;
+        audio_source.Play();
     }
 }

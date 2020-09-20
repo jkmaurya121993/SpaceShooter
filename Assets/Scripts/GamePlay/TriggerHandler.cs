@@ -15,13 +15,17 @@ public class TriggerHandler : MonoBehaviour {
     [Tooltip("Whether the projectile is destroyed in the collision, or not")]
     public bool destroyedByCollision;
 
-    private void OnTriggerEnter2D(Collider2D collision) //when a projectile collides with another object
+    /// <summary>
+    /// when a projectile collides with another object
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision) 
     {
         if (enemyBullet && collision.tag == "Player") //if anoter object is 'player' or 'enemy sending the command of receiving the damage
         {
             Player.instance.GetDamage(damage); 
             if (destroyedByCollision)
-                Destruction();
+                Destroy(gameObject);
         }
         else if (!enemyBullet && collision.tag == "Enemy")
         {
@@ -31,17 +35,10 @@ public class TriggerHandler : MonoBehaviour {
 
             if (destroyedByCollision)
             {
-                gameObject.SetActive(false);
-               // Destruction();
+                gameObject.SetActive(false);           
             }
                
         }
-    }
-
-    void Destruction() 
-    {
-        Destroy(gameObject);
-       
     }
 }
 
